@@ -31,13 +31,16 @@ public class SAP {
             return stLength.get(v).get(w);
         }
 
+        return seekCommonAncestor(v, w, true);
+
     }
 
     // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
     public int ancestor(int v, int w) {
-        if (stAncestor.get())
-
-        return seekCommonAncestor(v, w);
+        if (stAncestor.containsKey(v) && stAncestor.get(v).containsKey(w)) {
+            return stAncestor.get(v).get(w);
+        }
+        return seekCommonAncestor(v, w, false);
     }
 
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
@@ -71,8 +74,8 @@ public class SAP {
 
 
     /**Done*/
-    // seek of common ancestor of v and w
-    private int seekCommonAncestor(int v, int w) {
+    // seek of common ancestor of v and w, return -1 if NO
+    private int seekCommonAncestor(int v, int w, boolean length) {
         int pathLength = Integer.MAX_VALUE; // associated length sum of DistTo(ancestor)
         int ancestorShort = -1; // shortest common ancestor
         HashMap<Integer, Integer> ancestorsV = acquireAncestors(v); // ancestors + distTo
@@ -106,7 +109,11 @@ public class SAP {
         ancestorV.put(w, ancestorShort);
         stAncestor.put(v, ancestorV);
 
-        return ancestorShort;
+        if (length) {
+            return pathLength;
+        } else {
+            return ancestorShort;
+        }
     }
 
 
