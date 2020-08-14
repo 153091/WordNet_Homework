@@ -32,11 +32,18 @@ public class SAP {
             throw new IllegalArgumentException("vertices not correct");
         }
 
-
-        if (stLength.containsKey(v) && stLength.get(v).containsKey(w)) {
-            return stLength.get(v).get(w);
+        int big, small;
+        if (v > w) {
+            big = v;
+            small = w;
+        } else {
+            big = w;
+            small = v;
         }
-        return seekCommonAncestor(v, w, true);
+        if (stLength.containsKey(big) && stLength.get(big).containsKey(small)) {
+            return stLength.get(big).get(small);
+        }
+        return seekCommonAncestor(big, small, true);
     }
 
     /**Done*/
@@ -46,11 +53,18 @@ public class SAP {
             throw new IllegalArgumentException("vertices not correct");
         }
 
-
-        if (stAncestor.containsKey(v) && stAncestor.get(v).containsKey(w)) {
-            return stAncestor.get(v).get(w);
+        int big, small;
+        if (v > w) {
+            big = v;
+            small = w;
+        } else {
+            big = w;
+            small = v;
         }
-        return seekCommonAncestor(v, w, false);
+        if (stAncestor.containsKey(big) && stAncestor.get(big).containsKey(small)) {
+            return stAncestor.get(big).get(small);
+        }
+        return seekCommonAncestor(big, small, false);
     }
 
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
