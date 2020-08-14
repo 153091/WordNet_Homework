@@ -25,14 +25,13 @@ public class SAP {
         graph = new Digraph(G);
     }
 
+    /**Done*/
     // length of shortest ancestral path between v and w; -1 if no such path
     public int length(int v, int w) {
         if (stLength.containsKey(v) && stLength.get(v).containsKey(w)) {
             return stLength.get(v).get(w);
         }
-
         return seekCommonAncestor(v, w, true);
-
     }
 
     // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
