@@ -1,8 +1,6 @@
 import edu.princeton.cs.algs4.*;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.TreeSet;
 
 /**
  * Shortest Ancestral Path
@@ -12,7 +10,7 @@ public class SAP {
 
 
     private Digraph graph;
-    // vertex v and v's ancestors+distTo
+    // <vertex v, <v's ancestors, distTo>>
     private HashMap<Integer, HashMap<Integer, Integer>> st = new HashMap<>();
     // <vertex v, <vertex w, shortest ancestral length from v>>
     private HashMap<Integer, HashMap<Integer, Integer>> stLength = new HashMap<>();
@@ -28,16 +26,29 @@ public class SAP {
     }
 
     // length of shortest ancestral path between v and w; -1 if no such path
-    public int length(int v, int w)
+    public int length(int v, int w) {
+        if (stLength.containsKey(v) && stLength.get(v).containsKey(w)) {
+            return stLength.get(v).get(w);
+        }
+
+    }
 
     // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
-    public int ancestor(int v, int w)
+    public int ancestor(int v, int w) {
+        if (stAncestor.get())
+
+        return seekCommonAncestor(v, w);
+    }
 
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
     public int length(Iterable<Integer> v, Iterable<Integer> w)
 
     // a common ancestor that participates in shortest ancestral path; -1 if no such path
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w)
+
+
+
+        /**PRIVATE HELPER FUNCTIONS*/
 
         /**Done*/
     // get ancestors of v + distTo
@@ -57,6 +68,7 @@ public class SAP {
         }
         return ancestors;
     }
+
 
     /**Done*/
     // seek of common ancestor of v and w
@@ -96,6 +108,8 @@ public class SAP {
 
         return ancestorShort;
     }
+
+
 
     // do unit testing of this class
     public static void main(String[] args) {
