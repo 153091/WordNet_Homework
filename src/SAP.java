@@ -6,6 +6,11 @@ import java.util.HashMap;
  * Shortest Ancestral Path
  */
 
+/** % java SAP.java digraph1.txt
+ 9 12
+ length = 3, ancestor = 5
+ */
+
 public class SAP {
 
 
