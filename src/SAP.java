@@ -28,6 +28,11 @@ public class SAP {
     /**Done*/
     // length of shortest ancestral path between v and w; -1 if no such path
     public int length(int v, int w) {
+        if ((v < 0) || (w < 0) || (v >= graph.V()) || (w >= graph.V())) {
+            throw new IllegalArgumentException("vertices not correct");
+        }
+
+
         if (stLength.containsKey(v) && stLength.get(v).containsKey(w)) {
             return stLength.get(v).get(w);
         }
@@ -37,6 +42,11 @@ public class SAP {
     /**Done*/
     // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
     public int ancestor(int v, int w) {
+        if ((v < 0) || (w < 0) || (v >= graph.V()) || (w >= graph.V())) {
+            throw new IllegalArgumentException("vertices not correct");
+        }
+
+
         if (stAncestor.containsKey(v) && stAncestor.get(v).containsKey(w)) {
             return stAncestor.get(v).get(w);
         }
@@ -44,10 +54,79 @@ public class SAP {
     }
 
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
-    public int length(Iterable<Integer> v, Iterable<Integer> w)
+    public int length(Iterable<Integer> v, Iterable<Integer> w) {
+        if ((v == null) || (w == null)) {
+            throw new IllegalArgumentException("iterable argument is null");
+        }
+        for (Integer iv : v) {
+            if (iv == null) {
+                throw new IllegalArgumentException("Any iterable argument contains a null item");
+            }
+        }
+        for (Integer iw : w) {
+            if (iw == null) {
+                throw new IllegalArgumentException("Any iterable argument contains a null item");
+            }
+        }
+
+
+        int pathLength = Integer.MAX_VALUE;
+        for (int iv : v) {
+            for (int iw : w) {
+                if ((iv < 0) || (iw < 0) || (iv >= graph.V()) || (iw >= graph.V())) {
+                    throw new IllegalArgumentException("vertices not correct");
+                }
+
+                int current = length(iv, iw);
+                if ((current < pathLength) && (current != -1)) {
+                    pathLength = current;
+                }
+            }
+        }
+        if (pathLength == Integer.MAX_VALUE) {
+            return -1;
+        }
+        return pathLength;
+    }
 
     // a common ancestor that participates in shortest ancestral path; -1 if no such path
-    public int ancestor(Iterable<Integer> v, Iterable<Integer> w)
+    public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
+        if ((v == null) || (w == null)) {
+            throw new IllegalArgumentException("iterable argument is null");
+        }
+        for (Integer iv : v) {
+            if (iv == null) {
+                throw new IllegalArgumentException("Any iterable argument contains a null item");
+            }
+        }
+        for (Integer iw : w) {
+            if (iw == null) {
+                throw new IllegalArgumentException("Any iterable argument contains a null item");
+            }
+        }
+
+
+        int pathLength = Integer.MAX_VALUE;
+        int ancestorShort = 0;
+        for (int iv : v) {
+            for (int iw : w) {
+                if ((iv < 0) || (iw < 0) || (iv >= graph.V()) || (iw >= graph.V())) {
+                    throw new IllegalArgumentException("vertices not correct");
+                }
+
+                int current = length(iv, iw);
+                int anc = ancestor(iv, iw);
+                if ((current < pathLength) && (current != -1)) {
+                    pathLength = current;
+                    ancestorShort = anc;
+                }
+            }
+        }
+        if (pathLength == Integer.MAX_VALUE) {
+            return -1;
+        }
+        return ancestorShort;
+    }
 
 
 
