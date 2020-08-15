@@ -96,7 +96,13 @@ public class WordNet {
     }
 
     // is the word a WordNet noun?
-    public boolean isNoun(String word)
+    public boolean isNoun(String word) {
+        if (word == null) {
+            throw new IllegalArgumentException("This word == null");
+        }
+
+        return stStringId.containsKey(word);
+    }
 
     // distance between nounA and nounB (defined below)
     public int distance(String nounA, String nounB)
