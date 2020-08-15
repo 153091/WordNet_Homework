@@ -116,7 +116,17 @@ public class WordNet {
 
     // a synset (second field of synsets.txt) that is the common ancestor of nounA and nounB
     // in a shortest ancestral path (defined below)
-    public String sap(String nounA, String nounB)
+    public String sap(String nounA, String nounB) {
+        if ((!isNoun(nounA)) || (!isNoun(nounB))) {
+            throw new IllegalArgumentException("Any of this words is not a WordNet nouns");
+        }
+
+        StringBuilder s = new StringBuilder();
+        for (String word : stIdString.get(sap.ancestor(stStringId.get(nounA), stStringId.get(nounB)))) {
+            s.append(word + " ");
+        }
+        return s.toString();
+    }
 
     // do unit testing of this class
     public static void main(String[] args)
