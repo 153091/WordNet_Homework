@@ -1,6 +1,7 @@
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.SET;
+import edu.princeton.cs.algs4.Topological;
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -67,6 +68,26 @@ public class WordNet {
         catch (NoSuchElementException e) {
             throw new IllegalArgumentException("invalid input format in WordNet constructor", e);
         }
+
+        // check for roootedDAG
+        Topological topological = new Topological(graph);
+        if (!topological.hasOrder()) {
+            throw new IllegalArgumentException("Digraph has a cycle");
+        }
+
+        // check for only one root
+        int roots = 0;
+        for (int v = 0; v < graph.V(); v++) {
+            if (graph.outdegree(v) == 0) {
+                roots++;
+                if (roots >= 2) {
+                    throw new IllegalArgumentException("Digraph has " + roots + " roots");
+                }
+            }
+        }
+
+        // create SAP
+        sap = new SAP(graph);
     }
 
     // returns all WordNet nouns
