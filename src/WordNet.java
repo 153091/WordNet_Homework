@@ -91,7 +91,9 @@ public class WordNet {
     }
 
     // returns all WordNet nouns
-    public Iterable<String> nouns()
+    public Iterable<String> nouns() {
+        return stStringId.keySet();
+    }
 
     // is the word a WordNet noun?
     public boolean isNoun(String word)
