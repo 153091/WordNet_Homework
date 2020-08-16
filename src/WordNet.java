@@ -1,7 +1,4 @@
-import edu.princeton.cs.algs4.Digraph;
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.SET;
-import edu.princeton.cs.algs4.Topological;
+import edu.princeton.cs.algs4.*;
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -129,5 +126,13 @@ public class WordNet {
     }
 
     // do unit testing of this class
-    public static void main(String[] args)
+    public static void main(String[] args) {
+        Stopwatch stopwatch = new Stopwatch();
+        WordNet wordnet = new WordNet(args[0], args[1]);
+        double time = stopwatch.elapsedTime();
+        StdOut.println("elapsed time for building SAP" + time + "seconds");
+
+        StdOut.println("The distance between water and coffee is " + wordnet.distance("water", "coffee"));
+        StdOut.println("Common ancestor of water and coffe is " + wordnet.sap("water", "coffee"));
+    }
 }
