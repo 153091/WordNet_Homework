@@ -1,3 +1,9 @@
+/** % src\synsets.txt src\hypernyms.txt
+ * elapsed time for building SAP 2.938seconds
+ The distance between water and coffee is 3
+ Common ancestor of water and coffe is food nutrient*/
+
+
 import edu.princeton.cs.algs4.*;
 
 import java.util.HashMap;
@@ -130,7 +136,7 @@ public class WordNet {
         Stopwatch stopwatch = new Stopwatch();
         WordNet wordnet = new WordNet(args[0], args[1]);
         double time = stopwatch.elapsedTime();
-        StdOut.println("elapsed time for building SAP" + time + "seconds");
+        StdOut.println("Elapsed time for building SAP is " + time + "seconds");
 
         StdOut.println("The distance between water and coffee is " + wordnet.distance("water", "coffee"));
         StdOut.println("Common ancestor of water and coffe is " + wordnet.sap("water", "coffee"));
