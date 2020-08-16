@@ -1,3 +1,8 @@
+/** %src\synsets.txt src\hypernyms.txt src\outcast5.txt src\outcast8.txt src\outcast11.txt
+ * src\outcast5.txt: table
+ src\outcast8.txt: bed
+ src\outcast11.txt: potato*/
+
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
@@ -33,7 +38,7 @@ public class Outcast {
 
         for (int i = 0; i < size; i++) {
             int distance = 0;
-            for (int j = i; j < size; j++) {
+            for (int j = 0; j < size; j++) {
                 allDist[i][j] = wordnetCopy.distance(nouns[i], nouns[j]);
                 // From specification: di = distance(xi, x1) + distance(xi, x2) + ... + distance(xi, xn)
                 distance += allDist[i][j];
