@@ -33,12 +33,12 @@ public class Outcast {
 
         for (int i = 0; i < size; i++) {
             int distance = 0;
-            for (int j = i + 1; j < size; j++) {
+            for (int j = i; j < size; j++) {
                 allDist[i][j] = wordnetCopy.distance(nouns[i], nouns[j]);
                 // From specification: di = distance(xi, x1) + distance(xi, x2) + ... + distance(xi, xn)
                 distance += allDist[i][j];
             }
-            if (distance > distMax) {
+            if (distance >= distMax) {
                 distMax = distance;
                 idMax =  i;
             }
